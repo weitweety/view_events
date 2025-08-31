@@ -18,8 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
-      - name: Print OIDC token
-        run: echo $ACTIONS_ID_TOKEN_REQUEST_TOKEN
+      - name: Test Databricks auth
+        run: databricks current-user get
       - name: Update git folder
         # Set your workspace path and branch name here
         run: databricks repos update /Users/weitweety@gmail.com/view_events.git --branch main
