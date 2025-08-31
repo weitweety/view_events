@@ -20,6 +20,9 @@ jobs:
       - uses: databricks/setup-cli@main
       - name: Test Databricks auth
         run: databricks current-user me
+      - name: Test git folder
+        # Set your workspace path and branch name here
+        run: databricks repos get /Users/weitweety@gmail.com/view_events.git
       - name: Update git folder
         # Set your workspace path and branch name here
         run: databricks repos update /Users/weitweety@gmail.com/view_events.git --branch main
