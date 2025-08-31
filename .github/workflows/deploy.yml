@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
       - name: Test Databricks auth
-        run: databricks current-user get
+        run: databricks current-user
       - name: Update git folder
         # Set your workspace path and branch name here
         run: databricks repos update /Users/weitweety@gmail.com/view_events.git --branch main
