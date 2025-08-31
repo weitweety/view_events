@@ -1,11 +1,12 @@
 import sys
 from pyspark.sql.functions import col, current_timestamp
+from pyspark.sql import SparkSession
 
 def ingest_stream(input_path, table_name, checkpoint_path):
   # e.g. dbfs:/Volumes/dev/default/events_stream/
   # e.g. dev.default.view_events
   # e.g. dbfs:/Volumes/dev/default/autoloader_checkpoints/view_events
-
+  spark = SparkSession.builder.getOrCreate()
   # Clean up old table & checkpoints
   # spark.sql(f"DROP TABLE IF EXISTS {table_name}")
   # dbutils.fs.rm(checkpoint_path, True)
