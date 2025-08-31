@@ -19,8 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
       - name: Ensure repo exists
-        run: |
-          databricks repos list
+        run: databricks repos list
       - name: Update git folder
         # Set your workspace path and branch name here
         run: databricks repos update /Workspace/Users/weitweety@gmail.com/view_events --branch main
