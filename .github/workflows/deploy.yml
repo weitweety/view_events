@@ -20,4 +20,4 @@ jobs:
       - uses: databricks/setup-cli@main
       - name: Update git folder
         # Set your workspace path and branch name here
-        run: databricks repos update /Repos/weitweety@gmail.com/view_events --branch main
+        run: databricks repos update /Users/weitweety@gmail.com/view_events.git --branch main
