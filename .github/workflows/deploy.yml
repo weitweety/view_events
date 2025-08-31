@@ -22,7 +22,7 @@ jobs:
         run: databricks current-user me
       - name: Test git folder
         # Set your workspace path and branch name here
-        run: databricks repos get /Repos/weitweety@gmail.com/view_events
+        run: databricks repos get /Users/${{secrets.DATABRICKS_CLIENT_ID}}/view_events
       - name: Update git folder
         # Set your workspace path and branch name here
-        run: databricks repos update /Users/weitweety@gmail.com/view_events.git --branch main
+        run: databricks repos update /Users/${{secrets.DATABRICKS_CLIENT_ID}}/view_events --branch main
