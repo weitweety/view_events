@@ -18,7 +18,7 @@ resources:
           depends_on:
             - task_key: ingester
           spark_python_task:
-            python_file: /Workspace/[PATH_TO_YOUR_REPO_ROOT]/view_events/src/analyser.py
+            python_file: /Workspace/[PATH_TO_YOUR_REPO_ROOT]/view_events/tasks/bronze_to_silver.py
           min_retry_interval_millis: 900000
           disable_auto_optimization: true
           environment_key: Default
