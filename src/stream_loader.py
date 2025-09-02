@@ -18,9 +18,13 @@ def ingest_stream(input_path, table_name, checkpoint_path):
       .option("cloudFiles.format", "json")
       .option("cloudFiles.schemaLocation", checkpoint_path)
       .load(input_path)
-      .select("*", 
-              col("_metadata.file_path").alias("source_file"), 
-              current_timestamp().alias("processing_time"))
+      .withColumn("view_duration", col("view_duration").cast("double"))
+      .withColumn("timestamp", col("timestamp").cast("timestamp"))
+      .withColumn("visit_website", col("visit_website").cast("boolean"))
+      .withColumn("reaction", col("reaction").cast("string"))
+      .withColumn("country", col("country").cast("string"))
+      .withColumn("source_file", col("_metadata.file_path"))
+      .withColumn("processing_time", current_timestamp())
       .writeStream
       .option("checkpointLocation", checkpoint_path)
       .trigger(availableNow=True)
