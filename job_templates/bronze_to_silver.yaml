@@ -1,0 +1,31 @@
+resources:
+  jobs:
+    stream_processing:
+      name: stream_processing
+      trigger:
+        pause_status: UNPAUSED
+        periodic:
+          interval: 1
+          unit: HOURS
+      tasks:
+        - task_key: ingester
+          spark_python_task:
+            python_file: /Workspace/[PATH_TO_YOUR_REPO_ROOT]/view_events/tasks/src_to_bronze.py
+          min_retry_interval_millis: 900000
+          disable_auto_optimization: true
+          environment_key: Default
+        - task_key: analyser
+          depends_on:
+            - task_key: ingester
+          spark_python_task:
+            python_file: /Workspace/[PATH_TO_YOUR_REPO_ROOT]/view_events/src/analyser.py
+          min_retry_interval_millis: 900000
+          disable_auto_optimization: true
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            client: "3"
+      performance_target: STANDARD

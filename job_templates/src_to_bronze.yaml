@@ -1,0 +1,26 @@
+resources:
+  jobs:
+    fake_data_generator:
+      name: fake data generator
+      tasks:
+        - task_key: generator
+          spark_python_task:
+            python_file: /Workspace/[PATH_TO_YOUR_REPO_ROOT]/view_events/src/data_generator.py
+            parameters:
+              - /Volumes/dev/default/events_stream
+          min_retry_interval_millis: 900000
+          disable_auto_optimization: true
+          environment_key: generator_environment
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            client: "3"
+        - environment_key: generator_environment
+          spec:
+            client: "3"
+            dependencies:
+              - -r
+                /Workspace/[PATH_TO_YOUR_REPO_ROOT]/view_events/requirements.txt
+      performance_target: STANDARD
