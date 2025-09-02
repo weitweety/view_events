@@ -4,7 +4,6 @@ from src.analyser import *
 spark = SparkSession.builder.getOrCreate()
 
 df = spark.table("dev.default.view_events")
-total = df.count()
 
 agg_reaction_df = aggregate_reactions(df)
 agg_bin_duration = aggregate_duration(df)

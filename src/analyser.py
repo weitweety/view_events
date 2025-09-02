@@ -1,6 +1,7 @@
 from pyspark.sql.functions import col, when
 
 def aggregate_reactions(df):
+    total = df.count()
     agg_reaction_df = (
         df
         .groupBy("reaction")
@@ -11,6 +12,7 @@ def aggregate_reactions(df):
     return agg_reaction_df
 
 def aggregate_duration(df):
+    total = df.count()
     bin_duration = df.withColumn("bin_duration", when(col("view_duration") <= 5, "0-5")
                                 .when((col("view_duration") > 5) & (col("view_duration") <= 10), "5-10")
                                 .when((col("view_duration") > 10) & (col("view_duration") <= 20), "10-20")
@@ -25,6 +27,7 @@ def aggregate_duration(df):
     return agg_bin_duration
 
 def aggregate_visits(df):
+    total = df.count()
     agg_visit_df = (
         df
         .groupBy("visit_website")
