@@ -9,7 +9,6 @@ if len(sys.argv) < 2:
     exit(0)
 
 # output_dir = "dbfs:/Volumes/dev/default/events_stream/"
-# output_dir = "/home/syssec/faker/data"
 output_dir = sys.argv[1]
 fake = Faker()
 
